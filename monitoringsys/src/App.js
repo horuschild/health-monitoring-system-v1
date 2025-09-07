@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import Sidebar from "./components/Sidebar";
 import DashboardPage from "./pages/DashboardPage";
-import EmployeeList from "./pages/EmployeeList";
+import EmployeeListPage from "./pages/EmployeeListPage";
 import AdminList from "./pages/AdminList";
 import "./styles/Dashboard.scss";
 
@@ -13,7 +13,7 @@ function App() {
       case "Dashboard":
         return <DashboardPage />;
       case "Employee List":
-        return <EmployeeList />;
+        return <EmployeeListPage />;
       case "Admin List":
         return <AdminList />;
       default:
