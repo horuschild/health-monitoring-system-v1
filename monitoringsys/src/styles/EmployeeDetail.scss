@@ -1,0 +1,64 @@
+.employee-detail-page {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  min-height: 91.8vh;
+
+  h2 {
+    margin-bottom: 1rem;
+  }
+  .detail-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .close-btn {
+    background: transparent;
+    border: none;
+    font-size: 1.5rem;
+    cursor: pointer;
+    color: #555;
+  }
+
+  .close-btn:hover {
+    color: #e74c3c;
+  }
+
+  .chart-container {
+    height: 300px;
+    background: #fff;
+    padding: 1rem;
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  }
+
+  .table-container {
+    flex: 1;
+    overflow-y: auto; // scrollable
+    background: #fff;
+    padding: 1rem;
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    margin-top: 20px;
+    table {
+      width: 100%;
+      border-collapse: collapse;
+
+      th,
+      td {
+        padding: 0.5rem;
+        text-align: center;
+        border-bottom: 1px solid #ccc;
+      }
+
+      th {
+        background: #f0f2f5;
+        position: sticky;
+        top: 0; // header tetap fix
+      }
+    }
+  }
+}

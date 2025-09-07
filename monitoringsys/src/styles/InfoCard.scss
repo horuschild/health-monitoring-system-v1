@@ -1,0 +1,42 @@
+.info-card {
+  background: #fff;
+  padding: 1rem;
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+
+  .info-header {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 1rem;
+    padding: 0.5rem;
+    border-radius: 4px;
+    transition: all 0.3s;
+
+    .info-name {
+      font-weight: bold;
+      color: #333;
+    }
+
+    .info-nik {
+      color: #888;
+      font-size: 0.9rem;
+    }
+
+    &.alert {
+      background-color: #e74c3c; // merah
+      color: #fff; // text putih
+    }
+  }
+
+  .info-stats {
+    display: flex;
+    justify-content: space-around;
+    font-weight: bold;
+    font-size: 1.2rem;
+    color: #4a90e2;
+
+    .temperature {
+      color: #e67e22;
+    }
+  }
+}
