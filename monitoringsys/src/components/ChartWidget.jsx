@@ -1,5 +1,5 @@
 import React from 'react';
-import { Line, Pie } from 'react-chartjs-2';
+import { Line, Pie, Doughnut } from 'react-chartjs-2';
 import '../styles/ChartWidget.scss';
 import {
   Chart as ChartJS,
@@ -37,6 +37,8 @@ const ChartWidget = ({ type = 'line', data, title }) => {
     return <Line data={data} options={options} />;
   } else if (type === 'pie') {
     return <Pie data={data} options={options} />;
+  } else if (type === 'doughnut') {
+    return <Doughnut data={data} options={options} />;
   } else {
     return null;
   }

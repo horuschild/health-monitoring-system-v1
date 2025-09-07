@@ -1,8 +1,8 @@
 import React from 'react';
-import '../styles/Sidebar.scss';
+import '../styles/SideBar.scss';
 import { FaSignOutAlt } from 'react-icons/fa'; // icon logout dari react-icons
 
-const Sidebar = ({ active, setActive, onLogout }) => {
+const SideBar = ({ active, setActive, onLogout }) => {
   const menuItems = ['Dashboard', 'Employee List', 'Admin List'];
 
   return (
@@ -28,4 +28,4 @@ const Sidebar = ({ active, setActive, onLogout }) => {
   );
 };
 
-export default Sidebar;
+export default SideBar;
