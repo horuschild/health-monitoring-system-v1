@@ -1,7 +1,12 @@
 import React, { useEffect, useState } from "react";
 import { ref, onValue, remove } from "firebase/database";
-import { dbRT, dbFS} from "../firebase";
-import { doc, deleteDoc, getDoc } from "firebase/firestore";
+import { dbRT, dbFS } from "../firebase";
+import {
+  doc,
+  deleteDoc,
+  getDoc,
+  setDoc,
+} from "firebase/firestore";
 import { FaEdit, FaTrash } from "react-icons/fa";
 import "../styles/EmployeeList.scss";
 import EditEmployeeModal from "../components/EditEmployeeModal";
@@ -12,24 +17,32 @@ const EmployeeListPage = () => {
 
   useEffect(() => {
     const usersRef = ref(dbRT, "users");
+
     const unsubscribe = onValue(usersRef, async (snapshot) => {
       const data = snapshot.val() || {};
+
       const employeeArr = await Promise.all(
         Object.entries(data).map(async ([uid, val]) => {
-          // cek Firestore apakah ada Name/NIK
-          const fsDoc = await getDoc(doc(dbFS, "employees", uid));
+          // cek Firestore: users/{uid}
+          const fsDoc = await getDoc(doc(dbFS, "users", uid));
           const extra = fsDoc.exists() ? fsDoc.data() : { name: "", nik: "" };
+
+          // kalau belum ada doc di Firestore, buat kosong
+          if (!fsDoc.exists()) {
+            await setDoc(doc(dbFS, "users", uid), { name: "", nik: "" });
+          }
 
           return {
             uid,
-            email: `${uid}@device.com`, // sementara unique email
-            heartRate: val.humidity, // map humidity → HR
+            email: `${uid}`, // sementara pakai uid sbg email/deviceId
+            heartRate: val.humidity,
             temperature: val.temperature,
             timestamp: val.timestamp,
             ...extra,
           };
         })
       );
+
       setEmployees(employeeArr);
     });
 
@@ -38,9 +51,8 @@ const EmployeeListPage = () => {
 
   const handleDelete = async (uid) => {
     if (window.confirm("Are you sure you want to delete this employee and all history?")) {
-      await deleteDoc(doc(dbFS, "employees", uid));
-      await remove(ref(dbRT, `users/${uid}`));
-      // optional: hapus auth user kalau ada
+      await deleteDoc(doc(dbFS, "users", uid));   // hapus profile user di Firestore
+      await remove(ref(dbRT, `users/${uid}`));    // hapus data di RTDB
     }
   };
 
@@ -70,10 +82,10 @@ const EmployeeListPage = () => {
               <td>{emp.email}</td>
               <td>
                 <button onClick={() => setEditEmployee(emp)}>
-                  <FaEdit/>
+                  <FaEdit />
                 </button>
                 <button onClick={() => handleDelete(emp.uid)}>
-                  <FaTrash/>
+                  <FaTrash />
                 </button>
               </td>
             </tr>
@@ -82,7 +94,10 @@ const EmployeeListPage = () => {
       </table>
 
       {editEmployee && (
-        <EditEmployeeModal employee={editEmployee} onClose={() => setEditEmployee(null)} />
+        <EditEmployeeModal
+          employee={editEmployee}
+          onClose={() => setEditEmployee(null)}
+        />
       )}
     </div>
   );
