@@ -1,63 +1,56 @@
 .employee-detail-page {
-  padding: 0;
-  margin: 0;
-  box-sizing: border-box;
   display: flex;
   flex-direction: column;
-  height: calc(100vh - 4rem)
+  height: 100%;
 
-  h2 {
-    margin-bottom: 1rem;
-  }
   .detail-header {
     display: flex;
     justify-content: space-between;
     align-items: center;
   }
 
-  .close-btn {
-    background: transparent;
-    border: none;
-    font-size: 1.5rem;
-    cursor: pointer;
-    color: #555;
-  }
+  .filter-buttons {
+    margin: 1rem 0;
+    display: flex;
+    gap: 0.5rem;
 
-  .close-btn:hover {
-    color: #e74c3c;
+    button {
+      padding: 0.4rem 0.8rem;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+      background: #3498db;
+      color: #fff;
+
+      &:hover {
+        background: #2980b9;
+      }
+    }
   }
 
   .chart-container {
-    height: 300px;
+    flex-shrink: 0; // supaya tidak ikut scroll
     background: #fff;
     padding: 1rem;
     border-radius: 8px;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    margin-bottom: 1rem;
   }
 
   .table-container {
     flex: 1;
-    overflow-y: auto; // scrollable
+    overflow-y: auto;
     background: #fff;
-    padding: 1rem;
     border-radius: 8px;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-    margin-top: 20px;
+    padding: 1rem;
+
     table {
       width: 100%;
       border-collapse: collapse;
 
-      th,
-      td {
+      th, td {
         padding: 0.5rem;
-        text-align: center;
-        border-bottom: 1px solid #ccc;
-      }
-
-      th {
-        background: #f0f2f5;
-        position: sticky;
-        top: 0; // header tetap fix
+        border-bottom: 1px solid #eee;
+        text-align: left;
       }
     }
   }
